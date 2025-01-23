@@ -1,0 +1,42 @@
+[
+    {
+      "nama": "Mulya Ramadhan",
+      "gender": "Pria",
+      "jurusan": "Teknik Informatika",
+      "sks": 24,
+      "semester": 2,
+      "email": "mulyaranadhan@gmail.com",
+      "noHp": "081295096247",
+      "nim": 52010411
+    },
+    {
+      "nama": "Adysa Azzahra",
+      "gender": "Wanita",
+      "jurusan": "Kesehatan Masyarakat",
+      "sks": 24,
+      "semester": 2,
+      "email": "adysaazzahra@gmail.com",
+      "noHp": "08987654321",
+      "nim": 5201937
+    },
+    {
+      "nama": "Budi hartono",
+      "gender": "Pria",
+      "jurusan": "Teknik Lingkungan",
+      "sks": 22,
+      "semester": 5,
+      "email": "budigaming@gmail.com",
+      "noHp": "081798325437",
+      "nim": 5212231
+    },
+    {
+      "nama": "Fakhri anjay",
+      "gender": "Pria",
+      "jurusan": "Teknik Industri",
+      "sks": 22,
+      "semester": 5,
+      "email": "fakhrigimang@gmail.com",
+      "noHp": "081798332517",
+      "nim": 524121
+    }
+  ]
