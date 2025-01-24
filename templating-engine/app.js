@@ -3,12 +3,28 @@ const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const port = 3000
 const fs = require('fs/promises')
-const {loadContact, findContact} = require('./utils/contacts')
-
+const {loadContact, findContact, addContact, cekDuplikat} = require('./utils/contacts')
+const { title } = require('process')
+const { body, validationResult, check } = require('express-validator')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+const flash = require('connect-flash')
 
 // gunakan ejs
 app.set('view engine', 'ejs');
 app.use(expressLayouts)
+app.use(express.static('public')); // built in middleware
+app.use(express.urlencoded({extended: true}));
+
+// konfigurasi flash 
+app.use(cookieParser('secret'))
+app.use(session({
+  cookie: {maxAge: 6000},
+  secret : 'secret',
+  resave: true,
+  saveUninitialized: true, 
+}))
+app.use(flash())
 
 app.use((req, res, next) => {
   console.log('Time : ', Date.now());
@@ -49,8 +65,45 @@ app.get('/contact', (req, res) => {
   res.render('contact', {
     title: 'contact page',
     layout : 'layouts/main-layout',
-    contacts
+    contacts,
+    msg: req.flash('msg')
   });
+})
+
+app.get('/contact/add', (req, res) => {
+  res.render('add-contact', {
+    title : "Add contact",
+    layout : "layouts/main-layout",
+
+  })
+}) 
+
+app.post('/contact',[
+  body('nama').custom((value) => {
+    const duplikat = cekDuplikat(value);
+    if(duplikat) {
+      throw new Error('Nama sudah terdaftar')
+    }
+    return true;
+  }),
+  check('email', 'Email tidak valid').isEmail(),
+  check('nohp', 'No hp tidak valid').isMobilePhone('id-ID')
+  
+], (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    // return res.status(400).json({errors: errors.array()})
+    res.render('add-contact', {
+      title : 'Form tambah kontak',
+      layout : 'layouts/main-layout',
+      errors: errors.array()
+    })
+  } else {
+    addContact(req.body);
+    req.flash('msg', 'Data berhasil di tambahkan!')
+    res.redirect('/contact')
+  } 
+  
 })
 
 app.get('/contact/:nama', (req, res) => {
@@ -61,6 +114,7 @@ app.get('/contact/:nama', (req, res) => {
     contact,
   })
 })
+
 
 app.get('/about', (req, res) => {
   res.render('about', {

@@ -1,17 +1,1 @@
-[
-    {
-        "nama": "Mulya Ramadhan",
-        "nohp": "0812345678",
-        "email": "mulyaranadhan@gmail.com"
-    },
-    {
-        "nama": "Ahmad Erik",
-        "nohp": "089876543221",
-        "email": "ahmaderik@gmail.com"
-    },
-    {
-        "nama": "Elang Abdrraziq",
-        "nohp": "089876543221",
-        "email": "elangnibos@gmail.com"
-    }
-]
+[{"nama":"Mulya Ramadhan","nohp":"0812345678","email":"mulyaranadhan@gmail.com"},{"nama":"Ahmad Erik","nohp":"089876543221","email":"ahmaderik@gmail.com"},{"nama":"Elang Abdrraziq","nohp":"089876543221","email":"elangnibos@gmail.com"},{"nama":"sadasd","email":"sadsa@gmail.com","nohp":"0877268676127"},{"nama":"adsadsa","email":"sadas@gmail.com","nohp":"081295098723"}]

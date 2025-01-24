@@ -25,4 +25,19 @@ const findContact = (nama) => {
     return contact
 }
 
-module.exports = {loadContact, findContact}
+const saveContacts = (contacts) => {
+    fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+}
+
+
+const addContact = (contact) => {
+    const contacts = loadContact();
+    contacts.push(contact);
+    saveContacts(contacts);
+}
+
+const cekDuplikat = (nama) => {
+    const contacts = loadContact()
+    return contacts.find((contact) => contact.nama === nama);
+}
+module.exports = {loadContact, findContact, addContact, cekDuplikat}
