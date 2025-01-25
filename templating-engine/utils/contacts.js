@@ -40,4 +40,15 @@ const cekDuplikat = (nama) => {
     const contacts = loadContact()
     return contacts.find((contact) => contact.nama === nama);
 }
-module.exports = {loadContact, findContact, addContact, cekDuplikat}
+
+// hapus kontak 
+const deleteContact = (nama) => {
+    const fileBuffer = fs.readFileSync('data/contacts.json', 'utf8');
+    const contacts = JSON.parse(fileBuffer); // parsing json menjadi array objek
+
+    const filteredContacts = contacts.filter(contact => contact.nama !== nama)
+
+    fs.writeFileSync('data/contacts.json', JSON.stringify(filteredContacts, null, 2));
+    console.log(filteredContacts)
+}
+module.exports = {loadContact, findContact, addContact, cekDuplikat, deleteContact}

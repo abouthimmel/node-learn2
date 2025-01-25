@@ -3,7 +3,7 @@ const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const port = 3000
 const fs = require('fs/promises')
-const {loadContact, findContact, addContact, cekDuplikat} = require('./utils/contacts')
+const {loadContact, findContact, addContact, cekDuplikat, deleteContact} = require('./utils/contacts')
 const { title } = require('process')
 const { body, validationResult, check } = require('express-validator')
 const session = require('express-session')
@@ -104,6 +104,19 @@ app.post('/contact',[
     res.redirect('/contact')
   } 
   
+})
+
+app.get('/contact/delete/:nama', (req, res) => {
+  const contact = findContact(req.params.nama);
+  //jika kontak tidak ada
+  if(!contact) {
+    res.status(404);
+    res.send('<h1>404</h1>')
+  } else{
+    deleteContact(req.params.nama);
+    req.flash('msg', 'Data kontak berhasil dihapus');
+    res.redirect('/contact')
+  }
 })
 
 app.get('/contact/:nama', (req, res) => {
